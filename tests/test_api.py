@@ -9,10 +9,14 @@ def test_inicio():
 
     assert response.status_code == 200
     assert "mensaje" in response.json()
+    assert "modelos_disponibles" in response.json()
 
 def test_health():
     response = client.get("/health")
 
     assert response.status_code == 200
     assert "estado" in response.json()
-    assert "modelo_disponible" in response.json()
+    assert "modelos" in response.json()
+    assert "logistic_regression" in response.json()["modelos"]
+    assert "random_forest" in response.json()["modelos"]
+
