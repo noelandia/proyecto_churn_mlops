@@ -5,17 +5,21 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+#Nuevo modelo
+from sklearn.ensemble import RandomForestClassifier
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = BASE_DIR / "data"
 MODELS_DIR = BASE_DIR / "models"
 
 TRAIN_DATA = DATA_DIR / "train.csv"
-MODEL_FILE = MODELS_DIR / "modelo_churn.pkl"
+MODEL_FILE_LR = MODELS_DIR / "modelo_churn_lr.pkl" # Se ha renombrado el modelo modelo_churn_rf.pkl a modelo_churn_lr.pkl para reflejar el uso de LogisticRegression
+MODEL_FILE_RF = MODELS_DIR / "modelo_churn_rf.pkl" # Nuevo modelo RandomForestClassifier
 
-def entrenar_modelo():
+
+def entrenar_modelos():
     """
-    Entrena un modelo simple de clasificación para predecir churn.
+    Entrena dos modelos: LogisticRegression y RandomForestClassifier.
     """
 
     if not TRAIN_DATA.exists():
@@ -30,19 +34,33 @@ def entrenar_modelo():
     X = df.drop(columns=["churn"])
     y = df["churn"]
 
-    modelo = Pipeline(
+    # 1. Regresión Logística
+    modelo_lr = Pipeline(
         steps=[
             ("escalado", StandardScaler()),
             ("clasificador", LogisticRegression())
         ]
     )
 
-    modelo.fit(X, y)
+    modelo_lr.fit(X, y)
 
-    joblib.dump(modelo, MODEL_FILE)
+    joblib.dump(modelo_lr, MODEL_FILE_LR)
 
-    print("Modelo entrenado correctamente.")
-    print(f"Modelo guardado en: {MODEL_FILE}")
+    print("Modelo de Regresión Logística entrenado correctamente.")
+    print(f"Modelo de Regresión Logística guardado en: {MODEL_FILE_LR}")
+
+    # 2. Random Forest (NUEVO ALGORITMO)
+    modelo_rf = Pipeline(
+        steps=[
+            ("escalado", StandardScaler()),
+            ("clasificador", RandomForestClassifier(random_state=42))
+        ]
+    )
+    modelo_rf.fit(X, y)
+    joblib.dump(modelo_rf, MODEL_FILE_RF)
+    
+    print("Modelo de Random Forest entrenado correctamente.")
+    print(f"Modelo de Random Forest guardado en: {MODEL_FILE_RF}")
 
 if __name__ == "__main__":
-    entrenar_modelo()
+    entrenar_modelos()
