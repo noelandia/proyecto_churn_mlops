@@ -49,11 +49,19 @@ def entrenar_modelos():
     print("Modelo de Regresión Logística entrenado correctamente.")
     print(f"Modelo de Regresión Logística guardado en: {MODEL_FILE_LR}")
 
-    # 2. Random Forest (NUEVO ALGORITMO)
+    # 2. Random Forest
+    # Parámetros para el modelo de Random Forest
+    rf_params = {
+        'n_estimators': 200,
+        'max_depth': 10,
+        'min_samples_split': 5,
+        'random_state': 42
+    }
+
     modelo_rf = Pipeline(
         steps=[
             ("escalado", StandardScaler()),
-            ("clasificador", RandomForestClassifier(random_state=42))
+            ("clasificador", RandomForestClassifier(**rf_params))
         ]
     )
     modelo_rf.fit(X, y)
