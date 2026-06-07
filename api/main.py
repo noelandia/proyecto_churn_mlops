@@ -10,8 +10,8 @@ MODEL_FILE_LR = BASE_DIR / "models" / "modelo_churn_lr.pkl"
 MODEL_FILE_RF = BASE_DIR / "models" / "modelo_churn_rf.pkl"
 
 app = FastAPI(
-    title="API de Predicción de Churn",
-    version="0.2.0",
+    title="Servicio ML-Ops - Churn",
+    version="0.2.1",
     description="API básica para consumir dos modelos de Machine Learning."
 )
 
@@ -34,8 +34,10 @@ def cargar_modelo(modelo_path):
 @app.get("/")
 def inicio():
     return {
-        "mensaje": "API de predicción de churn activa",
-        "modelos_disponibles":["logistic_regression", "random_forest"]
+        "mensaje": "Servicio ML-Ops activo",
+        "estado": "ok",
+        "modelos_disponibles":["logistic_regression", "random_forest"],
+        "autor": "Noel Andia Flores"
     }
 
 @app.get("/health")
