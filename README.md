@@ -15,7 +15,7 @@ El objetivo es construir una estructura básica de trabajo para un proyecto de M
 
 Se trabajará con un caso simplificado de predicción de abandono de clientes, conocido como churn.
 
-Los modelos intentarán predecir si un cliente podría abandonar un servicio, utilizando variables como edad, antigüedad, saldo promedio, reclamos y uso de aplicación móvil.
+Los modelos intentarán predecir si un cliente podría abandonar un servicio, utilizando variables como antigüedad, saldo promedio y reclamos.
 
 ## Estructura del proyecto
 
@@ -46,12 +46,12 @@ proyecto_churn_mlops
 
 El flujo básico será:
 
-1. Preparar los datos.
-2. Entrenar los modelos.
-3. Evaluar los modelos.
-4. Guardar las métricas.
-5. Crear una API básica.
-6. Probar el funcionamiento inicial.
+1. Entrenar los modelos.
+2. Guardar las métricas.
+3. Crear los modelos serializados
+4. Crear una API.
+5. Probar el funcionamiento inicial.
+6. Validar los datos enviados a la API.
 
 ## Control de versiones
 
