@@ -2,14 +2,17 @@
 .git
 .gitignore
 
-# Entorno virtual
-.venv
+# Entorno virtual local
+.venv/
 venv
 
 # Caché de Python
 __pycache__
 *.pyc
 *.pyo
+
+# Caché de notebooks
+.ipynb_checkpoints/
 
 # Caché de pruebas
 .pytest_cache
@@ -25,3 +28,7 @@ models/*.pkl
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Archivos temporales
+*.log
+*.tmp
